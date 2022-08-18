@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:job_posting_app/Screens/Add_Job_Screen.dart';
+import 'package:job_posting_app/Screens/Edit_Job_Screen.dart';
 import 'package:job_posting_app/widgets/JobListWidget.dart';
 
 class Home extends StatefulWidget {
@@ -11,7 +11,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  List<String> items = [];
+  List<JobPost> items = [];
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,10 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         onPressed: () {
           Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => AddJob()));
+              .push<JobPost>(MaterialPageRoute(builder: (_) => AddJob()))
+              .then((value) => setState(() {
+                    items.add(value!);
+                  }));
         },
         child: Icon(
           Icons.add,
@@ -95,15 +98,66 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 26,
             ),
-            JobListWidget(),
-            JobListWidget(),
-            JobListWidget(),
-            JobListWidget(),
-            JobListWidget(),
-            JobListWidget(),
+            if (items.isNotEmpty) ListView.builder(
+                itemCount: items.length, shrinkWrap: true, itemBuilder: item) else Padding(
+                  padding: const EdgeInsets.only(top: 150),
+                  child: Center(child: Text("No items Available",style: TextStyle(color: Colors.white,fontSize: 25),)),
+                )
           ],
         ),
       ),
     );
   }
+  Widget item(BuildContext context, int index) => Padding(
+    padding: const EdgeInsets.only(right: 22),
+    child: Container(
+      margin: EdgeInsets.only(bottom: 11),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: Color(0xFF201E27),
+          border: Border.all(color: Color(0xFF201E27))),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15, top: 20),
+        child: Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Container(
+            child: Row(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text( items[index].title,
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600)),
+                    Text( items[index].description,
+                        style: TextStyle(
+                            color: Color(0xFF8F8F9E),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400)),
+                  ],
+                ),
+                SizedBox(width: 100),
+                Expanded(child: GestureDetector(onTap:(){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => EditJob()));
+                },child: Icon(Icons.edit,color: Colors.white,))),
+
+                Expanded(
+                  child: GestureDetector(onTap:(){
+                    setState((){
+                      items.removeAt(index);
+                    });
+                  },
+                      child: Icon(Icons.delete, color: Colors.red)),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
 }
+
+

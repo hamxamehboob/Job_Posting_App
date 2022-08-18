@@ -7,6 +7,7 @@ import 'package:job_posting_app/widgets/App_TextField.dart';
 class AddJob extends StatelessWidget {
    AddJob({Key? key}) : super(key: key);
    TextEditingController titleFieldController = TextEditingController();
+   TextEditingController descriptionfieldcontroller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,11 +49,38 @@ class AddJob extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(left: 24),
-              child: APPTextField(placeholder: "Enter Position Name"),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 15),
+                child: Container(
+                  decoration: BoxDecoration(color: Color(0xFF1E1C24),
+                      borderRadius: BorderRadius.circular(15),border: Border.all(color: Color(0xFF5D5D67))),
+                  child:  Padding(
+                    padding: EdgeInsets.all(5),
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: TextField(
+                        controller: titleFieldController,
+                        keyboardType: TextInputType.multiline,
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w400, fontSize: 15),
+                        decoration: InputDecoration(
+                          hintText: "Enter Postion Name",
+                          hintStyle: TextStyle(
+                              color: Color(0xFF8F8F9E),
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
             ),
             SizedBox(
               height: 20,
-            ),Padding(
+            ),
+            Padding(
               padding: const EdgeInsets.only(left: 24,right: 17),
               child: Container(
                 height: 290,
@@ -63,7 +91,7 @@ class AddJob extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: TextField(
-                      controller:titleFieldController ,
+                      controller:descriptionfieldcontroller ,
                       keyboardType: TextInputType.multiline,
                       style: TextStyle(
                           color: Colors.white, fontWeight: FontWeight.w400, fontSize: 15),
@@ -81,16 +109,22 @@ class AddJob extends StatelessWidget {
               ),
             ),
             SizedBox(height: 140,),
-
             Padding(
               padding: const EdgeInsets.only(left: 20),
               child: AppButton(
                   label: "Submit Job",
                   Navigation: () {
-                    Navigator.pop(context,titleFieldController.text);
+                    Navigator.pop(context,JobPost(titleFieldController.text, descriptionfieldcontroller.text));
                   }),
-            )
+            ),
+
           ],
         ));
   }
+}
+class JobPost{
+  final String title;
+  final String description;
+
+  JobPost(this.title, this.description);
 }

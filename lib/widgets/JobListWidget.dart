@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 
-class JobListWidget extends StatefulWidget {
+class JobList extends StatelessWidget {
+  const JobList({required this.placeholder1,required this.placeholder2});
 
-
-  @override
-  State<JobListWidget> createState() => _JobListWidgetState();
-}
-
-class _JobListWidgetState extends State<JobListWidget> {
+  final String placeholder1;
+  final String placeholder2;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,10 +12,11 @@ class _JobListWidgetState extends State<JobListWidget> {
       child: Container(
         margin: EdgeInsets.only(bottom: 11),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),color: Color(0xFF201E27),border: Border.all(color: Color(0xFF201E27))
-        ),
-        child:  Padding(
-          padding: const EdgeInsets.only(left: 15,top: 20),
+            borderRadius: BorderRadius.circular(10),
+            color: Color(0xFF201E27),
+            border: Border.all(color: Color(0xFF201E27))),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 15, top: 20),
           child: Padding(
             padding: const EdgeInsets.only(bottom: 20),
             child: Container(
@@ -27,24 +25,34 @@ class _JobListWidgetState extends State<JobListWidget> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Flutter Developer Required",style: TextStyle(color:Colors.white,fontSize: 15,fontWeight: FontWeight.w600)),
-                      Text("Karachi, Pakistan",style: TextStyle(color:Color(0xFF8F8F9E),fontSize: 12,fontWeight: FontWeight.w400)),
+                      Text(placeholder1,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600)),
+                      Text(placeholder2,
+                          style: TextStyle(
+                              color: Color(0xFF8F8F9E),
+                              fontSize: 12,
+                              fontWeight: FontWeight.w400)),
                     ],
-
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 60),
-                    child: Icon(Icons.edit,color: Colors.white,),
+                    child: Icon(
+                      Icons.edit,
+                      color: Colors.white,
+                    ),
                   ),
-                  SizedBox(width: 20,),
-                  Icon(Icons.delete,color: Colors.red)
+                  SizedBox(
+                    width: 20,
+                  ),
+                  Icon(Icons.delete, color: Colors.red)
                 ],
               ),
-
             ),
           ),
         ),
-
       ),
     );
   }

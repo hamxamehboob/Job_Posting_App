@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 class APPTextField extends StatelessWidget {
    APPTextField({required this.placeholder});
   final String placeholder;
-
-
   @override
   Widget build(BuildContext context) {
     return Padding(
