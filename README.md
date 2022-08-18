@@ -2,7 +2,7 @@
 
 I have made a Simple Job Posting App with adding,editing & deleting functionality.User can post the job,can edit that posted job & can delete that post.
 
-Here is the link of Figma Link: https://www.figma.com/file/zL4aHU6LvtJC4L0B4OZiNH/JobPostinApp?node-id=1%3A96.
+Here is the link of Figma: https://www.figma.com/file/zL4aHU6LvtJC4L0B4OZiNH/JobPostinApp?node-id=1%3A96.
 
 Below are the ScreenShots of My App.
 
